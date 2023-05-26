@@ -24,6 +24,7 @@ Auth::routes();
 
 Route::get('/', [ListingController::class, 'all']);
 Route::get('/listing/{id}', [ListingController::class, 'view']);
+Route::get('/fetch_listing', [ListingController::class, 'fetch_listing'])->name('fetch_listing');
 Route::post('/rating', [ListingController::class, 'rating'])->name('rating');
 Route::get('/admin/login', [AdminController::class, 'loginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'login']);

@@ -1,10 +1,5 @@
-@extends('public.template')
-
-@section('screen')
-         <div style="width:1020px;margin:auto">
-         <div  class ="sm:flex"  id="listing-wrapper" style="flex-direction: row;justify-content: flex-start;flex-wrap:wrap">
-                @foreach ($business as $busines) 
-                <div style="width:250px;border:1px solid #FFFFF;margin-left:5px" class="list">
+@foreach ($records as $busines) 
+                <div style="width:250px;border:1px solid #FFFFF;">
  
                     <!-- First product box start here-->
                     <div class="prod-info-main prod-wrap clearfix">
@@ -92,17 +87,3 @@
                 </div>
              </div>
              @endforeach
-
-             <input type="hidden" id="start" value="0">
-             <input type="hidden" id="itemsperpage" value="{{ $itemsperpage }}">
-             <input type="hidden" id="totalrecords" value="{{ $totalrecords; }}">
- <!-- end product -->
- 
-</div>
-</div>
-</div>
-</div>
-</div>
-
-@endsection
-

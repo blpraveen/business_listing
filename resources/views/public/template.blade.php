@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel = "stylesheet" type = "text/css" href = "/html/style.css">
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
 <body class="">
         <div style="height:8vh !important">
@@ -47,7 +47,10 @@
             y[3].innerHTML= "<i class='rating-edit fa fa-star-o'></i>" ;
             y[4].innerHTML= "<i class='rating-edit fa fa-star-o'></i>" ;
         }
-        document.getElementById ("clear-rating").addEventListener ("click", clear_rating, false);
+        if(document.getElementById ("clear-rating")){
+            document.getElementById ("clear-rating").addEventListener ("click", clear_rating, false);
+        }
+        
 
         function change(cname,id)
         {
@@ -83,6 +86,54 @@
                 return false;
             }
         }
+
+        checkWindowSize();
+
+       // Check if the page has enough content or not. If not then fetch records
+       function checkWindowSize(){
+            if($(window).height() >= $(document).height()){
+                  // Fetch records
+                  fetchData();
+            }
+       }
+
+       // Fetch records
+       function fetchData(){
+             var start = Number($('#start').val());
+             var allcount = Number($('#totalrecords').val());
+             var rowperpage = Number($('#itemsperpage').val());
+             start = start + rowperpage;
+             if(start <= allcount){
+                  $('#start').val(start);
+
+                  $.ajax({
+                       url:"{{route('fetch_listing')}}",
+                       data: {start:start},
+                       dataType: 'json',
+                       success: function(response){
+
+                            // Add
+                            $("#listing-wrapper .list:last").after(response.html).show().fadeIn("slow");
+
+                            // Check if the page has enough content or not. If not then fetch records
+                            checkWindowSize();
+                       }
+                  });
+             }
+       }
+
+       $(document).on('touchmove', onScroll); // for mobile
+       
+       function onScroll(){
+             
+             if(($(window).scrollTop()) > ($(document).height() - $(window).height()-10)) {
+                   fetchData(); 
+             }
+       }
+
+       $(window).scroll(function(){
+             onScroll();
+       });
         </script>
 </body>
 </html>
