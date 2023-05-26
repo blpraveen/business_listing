@@ -20,22 +20,36 @@ DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
+Laravel User Scaffolding 
+```bash
+php artisan ui bootstrap
+```
+
+Run Npm 
+
+```
+$ npm install
+$ npm run build
+```
+
 
 - Migrate tables and seed with demo data
 ```
 $ php artisan migrate --seed
 ```
 
+
 - Access it on
 ```
 $ php artisan serve
 http://localhost:8000/
 ```
-
-upload the excel file then run the queue
-
+There will be no listing need to add listing from admin 
+Admin Login
 ```
-$ php artisan queue:work
+http://127.0.0.1:8000/admin/login
+email:blpraveen2002@gmail.com
+password:Praveen01
 ```
 
-Check in Database the file get uploaded
+Add some listing and view the home page. In Listing detail page you can submit the rating
